@@ -12,41 +12,132 @@ public class LoginPage {
 
     public LoginPage() {
         frame = new JFrame("Login - Aplikasi Penyewaan Kendaraan");
-        frame.setSize(400, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new GridLayout(3, 1));
+        frame.setLayout(new GridBagLayout());
 
-        JLabel titleLabel = new JLabel("Selamat Datang di Aplikasi Penyewaan Kendaraan!", SwingConstants.CENTER);
+        // Set warna latar belakang frame
+        frame.getContentPane().setBackground(Color.decode("#FFC107")); // Warna kuning
+
+        // Panel utama
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBackground(Color.decode("#212121")); // Warna hitam gelap
+        panel.setPreferredSize(new Dimension(500, 400));
+
+        // Gunakan GridBagConstraints
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10); // Margin di sekitar komponen
+        gbc.fill = GridBagConstraints.NONE; // Tidak memaksa elemen mengisi ruang
+        gbc.weightx = 1.0; // Memastikan elemen di tengah secara horizontal
+        gbc.weighty = 1.0; // Memastikan elemen di tengah secara vertikal
+
+        // Judul
+        JLabel titleLabel = new JLabel("Login");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        titleLabel.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER; // Pastikan di tengah
+        panel.add(titleLabel, gbc);
+
+        // Subjudul
+        JLabel subtitleLabel = new JLabel("Pilih jenis login Anda");
+        subtitleLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        subtitleLabel.setForeground(Color.WHITE);
+        gbc.gridy = 1;
+        panel.add(subtitleLabel, gbc);
+
+        // Tombol Penyewa
         JButton adminButton = new JButton("Login sebagai Penyewa");
+        adminButton.setFont(new Font("Arial", Font.BOLD, 14));
+        adminButton.setBackground(Color.decode("#009688")); // Warna hijau
+        adminButton.setForeground(Color.WHITE);
+        gbc.gridy = 2;
+        gbc.gridwidth = 1; // Tombol kembali menjadi 1 kolom
+        panel.add(adminButton, gbc);
+
+        // Tombol Pesewa
         JButton memberButton = new JButton("Login sebagai Pesewa");
+        memberButton.setFont(new Font("Arial", Font.BOLD, 14));
+        memberButton.setBackground(Color.decode("#F44336")); // Warna merah
+        memberButton.setForeground(Color.WHITE);
+        gbc.gridx = 1; // Kolom kedua
+        panel.add(memberButton, gbc);
 
-        frame.add(titleLabel);
-        frame.add(adminButton);
-        frame.add(memberButton);
+        // Tambahkan panel ke frame
+        frame.add(panel);
 
+        // Tambahkan aksi untuk tombol-tombol
         adminButton.addActionListener(e -> showPenyewaLogin());
         memberButton.addActionListener(e -> showPesewaLogin());
 
+        frame.pack();
+        frame.setLocationRelativeTo(null); // Pusatkan frame di layar
         frame.setVisible(true);
     }
 
     private void showPenyewaLogin() {
         JFrame adminFrame = new JFrame("Login - Penyewa");
-        adminFrame.setSize(400, 400);
         adminFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        adminFrame.setLayout(new GridLayout(4, 1));
+        adminFrame.setLayout(new GridBagLayout());
+        adminFrame.getContentPane().setBackground(Color.decode("#FFC107"));
 
-        JLabel Jusername = new JLabel("Username");
-        JTextField usernameField = new JTextField();
-        JLabel Jpassword = new JLabel("Password");
-        JPasswordField passwordField = new JPasswordField();
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBackground(Color.decode("#212121"));
+        panel.setPreferredSize(new Dimension(400, 400));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(15, 15, 15, 15);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel titleLabel = new JLabel("Login Penyewa");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        titleLabel.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(titleLabel, gbc);
+
+        JLabel usernameLabel = new JLabel("Username");
+        usernameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        usernameLabel.setForeground(Color.WHITE);
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        panel.add(usernameLabel, gbc);
+
+        JTextField usernameField = new JTextField(20);
+        usernameField.setFont(new Font("Arial", Font.PLAIN, 16));
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        panel.add(usernameField, gbc);
+
+        JLabel passwordLabel = new JLabel("Password");
+        passwordLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        passwordLabel.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        panel.add(passwordLabel, gbc);
+
+        JPasswordField passwordField = new JPasswordField(20);
+        passwordField.setFont(new Font("Arial", Font.PLAIN, 16));
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        panel.add(passwordField, gbc);
+
         JButton loginButton = new JButton("Login");
+        loginButton.setFont(new Font("Arial", Font.BOLD, 16));
+        loginButton.setBackground(Color.decode("#009688"));
+        loginButton.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(loginButton, gbc);
 
-        adminFrame.add(Jusername);
-        adminFrame.add(usernameField);
-        adminFrame.add(Jpassword);
-        adminFrame.add(passwordField);
-        adminFrame.add(loginButton);
+        adminFrame.add(panel);
 
         loginButton.addActionListener(e -> {
             String username = usernameField.getText();
@@ -61,44 +152,98 @@ public class LoginPage {
             }
         });
 
+        adminFrame.pack();
+        adminFrame.setLocationRelativeTo(null);
         adminFrame.setVisible(true);
     }
 
     private void showPesewaLogin() {
-        JFrame memberFrame = new JFrame("Login - Member");
-        memberFrame.setSize(400, 400);
+        JFrame memberFrame = new JFrame("Login - Pesewa");
         memberFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        memberFrame.setLayout(new GridLayout(4, 1));
+        memberFrame.setLayout(new GridBagLayout());
+        memberFrame.getContentPane().setBackground(Color.decode("#FFC107"));
 
-        JLabel Jusername = new JLabel("Username");
-        JTextField usernameField = new JTextField();
-        JLabel Jpassword = new JLabel("Password");
-        JPasswordField passwordField = new JPasswordField();
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBackground(Color.decode("#212121"));
+        panel.setPreferredSize(new Dimension(400, 400));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(15, 15, 15, 15);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel titleLabel = new JLabel("Login Pesewa");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        titleLabel.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(titleLabel, gbc);
+
+        JLabel usernameLabel = new JLabel("Username");
+        usernameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        usernameLabel.setForeground(Color.WHITE);
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        panel.add(usernameLabel, gbc);
+
+        JTextField usernameField = new JTextField(20);
+        usernameField.setFont(new Font("Arial", Font.PLAIN, 16));
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        panel.add(usernameField, gbc);
+
+        JLabel passwordLabel = new JLabel("Password");
+        passwordLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        passwordLabel.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        panel.add(passwordLabel, gbc);
+
+        JPasswordField passwordField = new JPasswordField(20);
+        passwordField.setFont(new Font("Arial", Font.PLAIN, 16));
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        panel.add(passwordField, gbc);
+
         JButton loginButton = new JButton("Login");
-        JButton registerButton = new JButton("Buat Akun");
+        loginButton.setFont(new Font("Arial", Font.BOLD, 16));
+        loginButton.setBackground(Color.decode("#009688"));
+        loginButton.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(loginButton, gbc);
 
-        memberFrame.add(Jusername);
-        memberFrame.add(usernameField);
-        memberFrame.add(Jpassword);
-        memberFrame.add(passwordField);
-        memberFrame.add(loginButton);
-        memberFrame.add(registerButton);
+        JButton registerButton = new JButton("Buat Akun");
+        registerButton.setFont(new Font("Arial", Font.BOLD, 16));
+        registerButton.setBackground(Color.decode("#F44336"));
+        registerButton.setForeground(Color.WHITE);
+        gbc.gridx = 1;
+        panel.add(registerButton, gbc);
+
+        memberFrame.add(panel);
 
         loginButton.addActionListener(e -> {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
             if (users.containsKey(username) && users.get(username).equals(password)) {
-                JOptionPane.showMessageDialog(memberFrame, "Login berhasil sebagai Member!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(memberFrame, "Login berhasil sebagai Pesewa!", "Info", JOptionPane.INFORMATION_MESSAGE);
                 new PanelPesewa();
                 memberFrame.dispose();
             } else {
-                JOptionPane.showMessageDialog(memberFrame, "Username atau Password Member salah!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(memberFrame, "Username atau Password Pesewa salah!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 
         registerButton.addActionListener(e -> new Registrasi());
 
+        memberFrame.pack();
+        memberFrame.setLocationRelativeTo(null);
         memberFrame.setVisible(true);
     }
 
