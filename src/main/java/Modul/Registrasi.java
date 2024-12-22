@@ -3,7 +3,7 @@ package Modul;
 import javax.swing.*;
 import java.awt.*;
 
-class Registrasi {
+public class Registrasi {
     private final JFrame frame;
 
     public Registrasi() {
@@ -17,7 +17,7 @@ class Registrasi {
         // Panel utama dengan warna latar belakang gelap
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(Color.decode("#212121")); // Warna hitam gelap
-        panel.setPreferredSize(new Dimension(400, 500)); // Ukuran panel
+        panel.setPreferredSize(new Dimension(400, 400)); // Ukuran panel
 
         // Gunakan GridBagConstraints untuk mengatur posisi komponen
         GridBagConstraints gbc = new GridBagConstraints();
@@ -122,7 +122,7 @@ class Registrasi {
         // Tambahkan aksi untuk tombol Login
         loginButton.addActionListener(e -> {
             frame.dispose(); // Menutup jendela registrasi
-            new LoginPage(); // Buka halaman login
+            new TampilanLoginPesewa(); // Buka halaman pesewa
         });
 
         frame.pack();
