@@ -2,9 +2,12 @@ package Modul;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PanelPenyewa {
-    private final JFrame frame;
+
+class PanelPenyewa {
+    JFrame frame;
 
     public PanelPenyewa() {
         frame = new JFrame("Panel Penyewa");

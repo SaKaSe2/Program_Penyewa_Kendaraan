@@ -1,11 +1,11 @@
 package Modul;
 
-public class Kendaraan {
-    private final String jenis;
-    private final String nama;
-    private final String lokasi;
-    private final int harga;
-    private final String metode;
+class Kendaraan {
+    String jenis;
+    String nama;
+    String lokasi;
+    int harga;
+    String metode;
 
     public Kendaraan(String jenis, String nama, String lokasi, int harga, String metode) {
         this.jenis = jenis;

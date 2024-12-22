@@ -2,9 +2,11 @@ package Modul;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
-public class TambahKendaraanDialog {
+class TambahKendaraanDialog {
     public TambahKendaraanDialog(List<Kendaraan> katalog) {
         JDialog dialog = new JDialog();
         dialog.setTitle("Tambah Kendaraan");
@@ -25,6 +27,7 @@ public class TambahKendaraanDialog {
         JRadioButton hondaButton = new JRadioButton("Honda");
         JRadioButton ktmButton = new JRadioButton("KTM");
         JRadioButton subaruButton = new JRadioButton("Subaru");
+
         namaGroup.add(yamahaButton);
         namaGroup.add(suzukiButton);
         namaGroup.add(hondaButton);
@@ -55,6 +58,36 @@ public class TambahKendaraanDialog {
         namaPanel.add(subaruButton);
         dialog.add(namaPanel);
 
+        yamahaButton.setEnabled(false);
+        suzukiButton.setEnabled(false);
+        hondaButton.setEnabled(false);
+        ktmButton.setEnabled(false);
+        subaruButton.setEnabled(false);
+
+        mobilButton.addActionListener(e -> {
+            yamahaButton.setEnabled(false);
+            suzukiButton.setEnabled(true);
+            hondaButton.setEnabled(true);
+            ktmButton.setEnabled(true);
+            subaruButton.setEnabled(true);
+        });
+
+        motorButton.addActionListener(e -> {
+            yamahaButton.setEnabled(true);
+            suzukiButton.setEnabled(true);
+            hondaButton.setEnabled(true);
+            ktmButton.setEnabled(true);
+            subaruButton.setEnabled(false);
+        });
+
+        minibusButton.addActionListener(e -> {
+            yamahaButton.setEnabled(false);
+            suzukiButton.setEnabled(false);
+            hondaButton.setEnabled(false);
+            ktmButton.setEnabled(false);
+            subaruButton.setEnabled(false);
+        });
+
         dialog.add(new JLabel("Keterangan/Lokasi Kendaraan:"));
         dialog.add(lokasiField);
         dialog.add(new JLabel("Harga Sewa Kendaraan:"));
@@ -66,21 +99,36 @@ public class TambahKendaraanDialog {
         dialog.add(new JLabel());
         dialog.add(saveButton);
 
-        saveButton.addActionListener(e -> {
-            try {
-                String jenis = mobilButton.isSelected() ? "Mobil" : motorButton.isSelected() ? "Motor" : "Minibus";
-                String nama = yamahaButton.isSelected() ? "Yamaha" : suzukiButton.isSelected() ? "Suzuki" : hondaButton.isSelected() ? "Honda" : ktmButton.isSelected() ? "KTM" : "Subaru";
-                String lokasi = lokasiField.getText();
-                int harga = Integer.parseInt(hargaField.getText());
-                String metode = metodeField.getText();
+        uploadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int result = fileChooser.showOpenDialog(dialog);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    String fotoPath = fileChooser.getSelectedFile().getAbsolutePath();
+                    fotoLabel.setText("Foto diupload: " + fotoPath);
+                }
+            }
+        });
 
-                Kendaraan kendaraan = new Kendaraan(jenis, nama, lokasi, harga, metode);
-                katalog.add(kendaraan);
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String jenis = mobilButton.isSelected() ? "Mobil" : motorButton.isSelected() ? "Motor" : "Minibus";
+                    String nama = yamahaButton.isSelected() ? "Yamaha" : suzukiButton.isSelected() ? "Suzuki" : hondaButton.isSelected() ? "Honda" : ktmButton.isSelected() ? "KTM" : "Subaru";
+                    String lokasi = lokasiField.getText();
+                    int harga = Integer.parseInt(hargaField.getText());
+                    String metode = metodeField.getText();
 
-                JOptionPane.showMessageDialog(dialog, "Kendaraan berhasil ditambahkan!", "Info", JOptionPane.INFORMATION_MESSAGE);
-                dialog.dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(dialog, "Input tidak valid!", "Error", JOptionPane.ERROR_MESSAGE);
+                    Kendaraan kendaraan = new Kendaraan(jenis, nama, lokasi, harga, metode);
+                    katalog.add(kendaraan);
+
+                    JOptionPane.showMessageDialog(dialog, "Kendaraan berhasil ditambahkan!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                    dialog.dispose();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(dialog, "Input tidak valid!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 

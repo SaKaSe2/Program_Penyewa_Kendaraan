@@ -122,7 +122,7 @@ class Registrasi {
         // Tambahkan aksi untuk tombol Login
         loginButton.addActionListener(e -> {
             frame.dispose(); // Menutup jendela registrasi
-            new PanelPesewa(); // Buka halaman login
+            new LoginPage(); // Buka halaman login
         });
 
         frame.pack();
