@@ -2,10 +2,15 @@ package Modul;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TampilanLoginPenyewa {
     private static final String ADMIN_USERNAME = "admin";
     private static final String ADMIN_PASSWORD = "admin123";
+
+    // Katalog kendaraan sebagai variabel statis
+    private static List<Kendaraan> katalog = new ArrayList<>();
 
     public void showPenyewaLogin() {
         JFrame adminFrame = new JFrame("Login - Penyewa");
@@ -76,7 +81,7 @@ public class TampilanLoginPenyewa {
 
             if (ADMIN_USERNAME.equals(username) && ADMIN_PASSWORD.equals(password)) {
                 JOptionPane.showMessageDialog(adminFrame, "Login berhasil sebagai Penyewa!", "Info", JOptionPane.INFORMATION_MESSAGE);
-                new PanelPenyewa();
+                new PanelPenyewa(katalog);
                 adminFrame.dispose();
             } else {
                 JOptionPane.showMessageDialog(adminFrame, "Username atau Password Penyewa salah!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -86,5 +91,9 @@ public class TampilanLoginPenyewa {
         adminFrame.pack();
         adminFrame.setLocationRelativeTo(null);
         adminFrame.setVisible(true);
+    }
+
+    public static List<Kendaraan> getKatalog() {
+        return katalog;
     }
 }

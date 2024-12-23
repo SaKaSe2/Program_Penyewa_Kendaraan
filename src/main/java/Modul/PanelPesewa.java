@@ -22,6 +22,7 @@ class PanelPesewa {
         // Panel Utama
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
+        // latar hitam
         frame.add(mainPanel, BorderLayout.CENTER);
 
         // Header
