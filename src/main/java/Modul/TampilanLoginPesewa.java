@@ -2,13 +2,21 @@ package Modul;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TampilanLoginPesewa {
+    private static final String ADMIN_USERNAME = "admin";
+    private static final String ADMIN_PASSWORD = "admin123";
+
+    // Katalog kendaraan sebagai variabel statis
+    static List<Kendaraan> katalog = new ArrayList<>();
+
     public void showPesewaLogin() {
-        JFrame memberFrame = new JFrame("Login - Pesewa");
-        memberFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        memberFrame.setLayout(new GridBagLayout());
-        memberFrame.getContentPane().setBackground(Color.decode("#FFC107"));
+        JFrame adminFrame = new JFrame("Login - Pesewa");
+        adminFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        adminFrame.setLayout(new GridBagLayout());
+        adminFrame.getContentPane().setBackground(Color.decode("#FFC107"));
 
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(Color.decode("#212121"));
@@ -61,36 +69,31 @@ public class TampilanLoginPesewa {
         loginButton.setForeground(Color.WHITE);
         gbc.gridx = 0;
         gbc.gridy = 3;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         panel.add(loginButton, gbc);
 
-        JButton registerButton = new JButton("Buat Akun");
-        registerButton.setFont(new Font("Arial", Font.BOLD, 16));
-        registerButton.setBackground(Color.decode("#F44336"));
-        registerButton.setForeground(Color.WHITE);
-        gbc.gridx = 1;
-        panel.add(registerButton, gbc);
-
-        memberFrame.add(panel);
+        adminFrame.add(panel);
 
         loginButton.addActionListener(e -> {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            if (LoginPage.getUsers().containsKey(username) && LoginPage.getUsers().get(username).equals(password)) {
-                JOptionPane.showMessageDialog(memberFrame, "Login berhasil sebagai Pesewa!", "Info", JOptionPane.INFORMATION_MESSAGE);
+            if (ADMIN_USERNAME.equals(username) && ADMIN_PASSWORD.equals(password)) {
+                JOptionPane.showMessageDialog(adminFrame, "Login berhasil sebagai Pesewa!", "Info", JOptionPane.INFORMATION_MESSAGE);
                 new PanelPesewa();
-                memberFrame.dispose();
+                adminFrame.dispose();
             } else {
-                JOptionPane.showMessageDialog(memberFrame, "Username atau Password Pesewa salah!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(adminFrame, "Username atau Password Pesewa salah!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 
-        registerButton.addActionListener(e -> new Registrasi());
+        adminFrame.pack();
+        adminFrame.setLocationRelativeTo(null);
+        adminFrame.setVisible(true);
+    }
 
-        memberFrame.pack();
-        memberFrame.setLocationRelativeTo(null);
-        memberFrame.setVisible(true);
+    public static List<Kendaraan> getKatalog() {
+        return katalog;
     }
 }

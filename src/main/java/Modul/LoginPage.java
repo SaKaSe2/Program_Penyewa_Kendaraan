@@ -46,7 +46,7 @@ public class LoginPage {
         panel.add(subtitleLabel, gbc);
 
         // Tombol Penyewa
-        JButton adminButton = new JButton("Login sebagai Penyewa");
+        JButton adminButton = new JButton("Login sebagai Pesewa");
         adminButton.setFont(new Font("Arial", Font.BOLD, 14));
         adminButton.setBackground(Color.decode("#009688")); // Warna hijau
         adminButton.setForeground(Color.WHITE);
@@ -55,7 +55,7 @@ public class LoginPage {
         panel.add(adminButton, gbc);
 
         // Tombol Pesewa
-        JButton memberButton = new JButton("Login sebagai Pesewa");
+        JButton memberButton = new JButton("Login sebagai Penyewa");
         memberButton.setFont(new Font("Arial", Font.BOLD, 14));
         memberButton.setBackground(Color.decode("#F44336")); // Warna merah
         memberButton.setForeground(Color.WHITE);
@@ -66,8 +66,8 @@ public class LoginPage {
         frame.add(panel);
 
         // Tambahkan aksi untuk tombol-tombol
-        adminButton.addActionListener(e -> new TampilanLoginPenyewa().showPenyewaLogin());
-        memberButton.addActionListener(e -> new TampilanLoginPesewa().showPesewaLogin());
+        adminButton.addActionListener(e -> new TampilanLoginPesewa().showPesewaLogin());
+        memberButton.addActionListener(e -> new TampilanLoginPenyewa().showPenyewaLogin());
 
         frame.pack();
         frame.setLocationRelativeTo(null); // Pusatkan frame di layar

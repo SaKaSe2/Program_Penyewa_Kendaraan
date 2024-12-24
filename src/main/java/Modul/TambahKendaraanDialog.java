@@ -163,8 +163,6 @@ class TambahKendaraanDialog {
                     JOptionPane.showMessageDialog(dialog, "Kendaraan berhasil ditambahkan!", "Info", JOptionPane.INFORMATION_MESSAGE);
                     dialog.dispose();
 
-                    // Update the table in PanelPenyewa
-                    new PanelPenyewa(katalog);  // Create new PanelPenyewa with updated katalog
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(dialog, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
